@@ -44,7 +44,7 @@ fun hide() {
                 val rgb = Color(
                     color.red or 1,
                     color.green or 1,
-                    setLeastSignificantBitToOne(color.blue)).rgb
+                    color.blue or 1).rgb
                 image.setRGB(i, j, rgb)
             }
         }
@@ -56,7 +56,8 @@ fun hide() {
     }
 }
 
+/*
 fun setLeastSignificantBitToOne(pixel: Int) : Int {
     return if (pixel % 2 == 0) pixel + 1
     else pixel
-}
+}*/
