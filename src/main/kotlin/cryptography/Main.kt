@@ -1,5 +1,10 @@
 package cryptography
 
+import java.awt.Color
+import java.awt.image.BufferedImage
+import java.io.File
+import javax.imageio.ImageIO
+
 /**
  * @author Mack_TB
  * @version 1.0
@@ -19,4 +24,39 @@ fun main() {
             else -> println("Wrong task: $command")
         }
     }
+}
+
+fun hide() {
+    try {
+        println("Input image file:")
+        val infileName = readLine()!!.toString()
+        val inImageFile = File(infileName)
+        println("Output image file:")
+        val outfileName = readLine()!!.toString()
+        val outImageFile = File(outfileName)
+
+        println("Input Image: $infileName")
+        println("Output Image: $outfileName")
+        val image : BufferedImage = ImageIO.read(inImageFile)
+        for (i in 0 until image.width) {
+            for (j in 0 until image.height) {
+                val color = Color(image.getRGB(i, j))
+                val rgb = Color(
+                    setLeastSignificantBitToOne(color.red),
+                    setLeastSignificantBitToOne(color.green),
+                    setLeastSignificantBitToOne(color.blue)).rgb
+                image.setRGB(i, j, rgb)
+            }
+        }
+        ImageIO.write(image, "png", outImageFile)
+
+        println("Image $outfileName is saved.")
+    } catch (e :Exception) {
+        println("Can't read input file!")
+    }
+}
+
+fun setLeastSignificantBitToOne(pixel: Int) : Int {
+    return if (pixel % 2 == 0) pixel + 1
+    else pixel
 }
