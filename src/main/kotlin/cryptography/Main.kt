@@ -6,8 +6,6 @@ import java.io.File
 import javax.imageio.ImageIO
 
 /**
- * @author Mack_TB
- * @version 1.0
  * @since 10/11/2021
  */
 
@@ -15,7 +13,7 @@ fun main() {
     while (true) {
         println("Task (hide, show, exit):")
         when(val command = readLine()) {
-            "hide" -> println("Hiding message in image.")
+            "hide" -> hide()
             "show" -> println("Obtaining message from image.")
             "exit" -> {
                 println("Bye!")
@@ -42,8 +40,8 @@ fun hide() {
             for (j in 0 until image.height) {
                 val color = Color(image.getRGB(i, j))
                 val rgb = Color(
-                    setLeastSignificantBitToOne(color.red),
-                    setLeastSignificantBitToOne(color.green),
+                    color.red or 1,
+                    color.green or 1,
                     setLeastSignificantBitToOne(color.blue)).rgb
                 image.setRGB(i, j, rgb)
             }
