@@ -37,6 +37,7 @@ fun hide() {
 
         println("Input Image: $infileName")
         println("Output Image: $outfileName")
+
         val image : BufferedImage = ImageIO.read(inImageFile)
         for (i in 0 until image.width) {
             for (j in 0 until image.height) {
@@ -52,6 +53,7 @@ fun hide() {
 
         ImageIO.write(image, "png", outImageFile)
         println("Image $outfileName is saved.")
+
     } catch (e :Exception) {
         println("Can't read input file!")
     }
