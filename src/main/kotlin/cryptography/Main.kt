@@ -49,8 +49,8 @@ fun hide() {
                 image.setRGB(i, j, rgb)
             }
         }
-        ImageIO.write(image, "png", outImageFile)
 
+        ImageIO.write(image, "png", outImageFile)
         println("Image $outfileName is saved.")
     } catch (e :Exception) {
         println("Can't read input file!")
