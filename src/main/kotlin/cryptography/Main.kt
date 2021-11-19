@@ -6,6 +6,8 @@ import java.io.File
 import javax.imageio.ImageIO
 
 /**
+ * @author Mack_TB
+ * @version 1.0
  * @since 10/11/2021
  */
 
