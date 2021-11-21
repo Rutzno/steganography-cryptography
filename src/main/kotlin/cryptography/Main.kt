@@ -76,6 +76,14 @@ fun getBit(value: Int, position: Int): Int {
     return (value shr position) and 1
 }
 
+fun putLastBitTo(blue: Int, b: Int): Int {
+    return if (b == 0) {
+        blue and 254
+    } else {
+        blue or b
+    }
+}
+
 fun add3Bytes(secretMessage: ByteArray): ByteArray {
     val message = ByteArray(secretMessage.size + 3)
     for (i in secretMessage.indices) {
