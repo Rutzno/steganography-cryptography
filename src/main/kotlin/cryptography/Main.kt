@@ -139,7 +139,7 @@ fun convertBinaryStringToDec(binaryString: String): Byte {
     return result.toByte()
 }
 
-/*fun setLeastSignificantBitToOne(pixel: Int) : Int {
+fun setLeastSignificantBitToOne(pixel: Int) : Int {
     return if (pixel % 2 == 0) pixel + 1
     else pixel
-}*/
+}
