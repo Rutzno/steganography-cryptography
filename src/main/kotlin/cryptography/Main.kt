@@ -41,6 +41,7 @@ fun hide() {
     println("Message to hide:")
     var secretMessage = readLine()!!.encodeToByteArray()
     secretMessage = add3Bytes(secretMessage)
+
     val inputImage : BufferedImage = ImageIO.read(inImageFile)
     if (secretMessage.size > inputImage.width + inputImage.height) {
         println("The input image is not large enough to hold this message.")
