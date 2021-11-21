@@ -27,28 +27,26 @@ fun main() {
 }
 
 fun hide() {
-    try {
-        println("Input image file:")
-        val infileName = readLine()!!.toString()
-        val inImageFile = File(infileName)
-        println("Output image file:")
-        val outfileName = readLine()!!.toString()
-        val outImageFile = File(outfileName)
-        println("Message to hide:")
-        var secretMessage = readLine()!!.encodeToByteArray()
-        secretMessage = add3Bytes(secretMessage)
-        val inputImage : BufferedImage = ImageIO.read(inImageFile)
-        if (secretMessage.size > inputImage.width + inputImage.height) {
-            println("The input image is not large enough to hold this message.")
-            return
-        }
-        insert(secretMessage, inputImage)
-        ImageIO.write(inputImage, "png", outImageFile)
-        println("Message saved in $outfileName image.")
-
-    } catch (e :Exception) {
+    println("Input image file:")
+    val infileName = readLine()!!.toString()
+    val inImageFile = File(infileName)
+    if (!inImageFile.exists()) {
         println("Can't read input file!")
     }
+    println("Output image file:")
+    val outfileName = readLine()!!.toString()
+    val outImageFile = File(outfileName)
+    println("Message to hide:")
+    var secretMessage = readLine()!!.encodeToByteArray()
+    secretMessage = add3Bytes(secretMessage)
+    val inputImage : BufferedImage = ImageIO.read(inImageFile)
+    if (secretMessage.size > inputImage.width + inputImage.height) {
+        println("The input image is not large enough to hold this message.")
+        return
+    }
+    insert(secretMessage, inputImage)
+    ImageIO.write(inputImage, "png", outImageFile)
+    println("Message saved in $outfileName image.")
 }
 
 fun insert(secretMessage: ByteArray, inputImage: BufferedImage) {
