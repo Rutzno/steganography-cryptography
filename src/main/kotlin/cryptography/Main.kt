@@ -42,26 +42,7 @@ fun hide() {
             println("The input image is not large enough to hold this message.")
             return
         }
-        var position = 7
-        var m = 0
-        loop@ for (y in 0 until inputImage.height) {
-            for (x in 0 until inputImage.width) {
-                val color = Color(inputImage.getRGB(x, y))
-                val b = putLastBitTo(color.blue, getBit(secretMessage[m].toInt(), position))
-                val rgb = Color(
-                    color.red,
-                    color.green,
-                    b
-                ).rgb
-                inputImage.setRGB(x, y, rgb)
-                position--
-                if (position == -1) {
-                    position = 7
-                    m++
-                }
-                if (m == secretMessage.size) break@loop
-            }
-        }
+        insert(secretMessage, inputImage)
         ImageIO.write(inputImage, "png", outImageFile)
         println("Message saved in $outfileName image.")
 
