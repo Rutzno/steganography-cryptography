@@ -17,7 +17,7 @@ fun main() {
         println("Task (hide, show, exit):")
         when(val command = readLine()) {
             "hide" -> hide()
-            "show" -> println("Obtaining message from image.")
+            "show" -> show()
             "exit" -> {
                 println("Bye!")
                 break
