@@ -33,6 +33,7 @@ fun hide() {
     val inImageFile = File(infileName)
     if (!inImageFile.exists()) {
         println("Can't read input file!")
+        return
     }
     println("Output image file:")
     val outfileName = readLine()!!.toString()
