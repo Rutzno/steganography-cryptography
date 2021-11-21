@@ -34,25 +34,36 @@ fun hide() {
         println("Output image file:")
         val outfileName = readLine()!!.toString()
         val outImageFile = File(outfileName)
-
-        println("Input Image: $infileName")
-        println("Output Image: $outfileName")
-
-        val image : BufferedImage = ImageIO.read(inImageFile)
-        for (i in 0 until image.width) {
-            for (j in 0 until image.height) {
-                val color = Color(image.getRGB(i, j))
+        println("Message to hide:")
+        var secretMessage = readLine()!!.encodeToByteArray()
+        secretMessage = add3Bytes(secretMessage)
+        val inputImage : BufferedImage = ImageIO.read(inImageFile)
+        if (secretMessage.size > inputImage.width + inputImage.height) {
+            println("The input image is not large enough to hold this message.")
+            return
+        }
+        var position = 7
+        var m = 0
+        loop@ for (y in 0 until inputImage.height) {
+            for (x in 0 until inputImage.width) {
+                val color = Color(inputImage.getRGB(x, y))
+                val b = putLastBitTo(color.blue, getBit(secretMessage[m].toInt(), position))
                 val rgb = Color(
-                    color.red or 1,
-                    color.green or 1,
-                    setLeastSignificantBitToOne(color.blue)
+                    color.red,
+                    color.green,
+                    b
                 ).rgb
-                image.setRGB(i, j, rgb)
+                inputImage.setRGB(x, y, rgb)
+                position--
+                if (position == -1) {
+                    position = 7
+                    m++
+                }
+                if (m == secretMessage.size) break@loop
             }
         }
-
-        ImageIO.write(image, "png", outImageFile)
-        println("Image $outfileName is saved.")
+        ImageIO.write(inputImage, "png", outImageFile)
+        println("Message saved in $outfileName image.")
 
     } catch (e :Exception) {
         println("Can't read input file!")
