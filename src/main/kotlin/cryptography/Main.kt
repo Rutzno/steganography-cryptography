@@ -79,7 +79,8 @@ fun show() {
     secretMessageBA.removeAt(--index)
     secretMessageBA.removeAt(--index)
     val message = secretMessageBA.toByteArray().toString(Charsets.UTF_8)
-    println("Message:\n$message")
+    println("Message:" +
+            "\n$message")
 }
 
 fun insert(secretMessage: ByteArray, inputImage: BufferedImage) {
