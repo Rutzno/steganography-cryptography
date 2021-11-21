@@ -70,6 +70,29 @@ fun hide() {
     }
 }
 
+fun insert(secretMessage: ByteArray, inputImage: BufferedImage) {
+    var position = 7
+    var m = 0
+    loop@ for (y in 0 until inputImage.height) {
+        for (x in 0 until inputImage.width) {
+            val color = Color(inputImage.getRGB(x, y))
+            val b = putLastBitTo(color.blue, getBit(secretMessage[m].toInt(), position))
+            val rgb = Color(
+                color.red,
+                color.green,
+                b
+            ).rgb
+            inputImage.setRGB(x, y, rgb)
+            position--
+            if (position == -1) {
+                position = 7
+                m++
+            }
+            if (m == secretMessage.size) break@loop
+        }
+    }
+}
+
 fun setLeastSignificantBitToOne(pixel: Int) : Int {
     return if (pixel % 2 == 0) pixel + 1
     else pixel
