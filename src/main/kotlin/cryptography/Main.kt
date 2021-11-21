@@ -50,6 +50,23 @@ fun hide() {
     println("Message saved in $outfileName image.")
 }
 
+fun show() {
+    println("Input image file:")
+    val infileName = readLine()!!.toString()
+    val inImageFile = File(infileName)
+    val inputImage: BufferedImage = ImageIO.read(inImageFile)
+    val secretMessageBA = mutableListOf<Byte>()
+    var byte = ""
+    var index: Int
+
+    index = secretMessageBA.size
+    secretMessageBA.removeAt(--index)
+    secretMessageBA.removeAt(--index)
+    secretMessageBA.removeAt(--index)
+    val message = secretMessageBA.toByteArray().toString(Charsets.UTF_8)
+    println("Message:\n$message")
+}
+
 fun insert(secretMessage: ByteArray, inputImage: BufferedImage) {
     var position = 7
     var m = 0
