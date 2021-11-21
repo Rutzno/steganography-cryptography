@@ -69,7 +69,7 @@ fun retrieveMessage(inputImage: BufferedImage): MutableList<Byte> {
     val secretMessageBA = mutableListOf<Byte>()
     var byte = ""
     var index: Int
-    /*loop@ for (y in 0 until inputImage.height) {
+    loop@ for (y in 0 until inputImage.height) {
         for (x in 0 until inputImage.width) {
             val color = Color(inputImage.getRGB(x, y))
             val bit = getBit(color.blue, 0)
@@ -84,7 +84,7 @@ fun retrieveMessage(inputImage: BufferedImage): MutableList<Byte> {
                 }
             }
         }
-    }*/
+    }
     return secretMessageBA
 }
 
