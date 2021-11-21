@@ -76,6 +76,18 @@ fun getBit(value: Int, position: Int): Int {
     return (value shr position) and 1
 }
 
+fun add3Bytes(secretMessage: ByteArray): ByteArray {
+    val message = ByteArray(secretMessage.size + 3)
+    for (i in secretMessage.indices) {
+        message[i] = secretMessage[i]
+    }
+    var indice = secretMessage.size
+    message[indice] = 0
+    message[++indice] = 0
+    message[++indice] = 3
+    return message
+}
+
 fun setLeastSignificantBitToOne(pixel: Int) : Int {
     return if (pixel % 2 == 0) pixel + 1
     else pixel
