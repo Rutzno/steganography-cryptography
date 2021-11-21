@@ -4,6 +4,7 @@ import java.awt.Color
 import java.awt.image.BufferedImage
 import java.io.File
 import javax.imageio.ImageIO
+import kotlin.math.pow
 
 /**
  * @author Mack_TB
@@ -94,6 +95,16 @@ fun add3Bytes(secretMessage: ByteArray): ByteArray {
     message[++indice] = 0
     message[++indice] = 3
     return message
+}
+
+fun convertBinaryStringToDec(binaryString: String): Byte {
+    var result = 0
+    var power = 0
+    for (i in binaryString.length - 1 downTo 0) {
+        result += binaryString[i].toString().toInt() * 2.0.pow(power.toDouble()).toInt()
+        power++
+    }
+    return result.toByte()
 }
 
 /*fun setLeastSignificantBitToOne(pixel: Int) : Int {
