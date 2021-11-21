@@ -55,10 +55,21 @@ fun show() {
     val infileName = readLine()!!.toString()
     val inImageFile = File(infileName)
     val inputImage: BufferedImage = ImageIO.read(inImageFile)
+    val secretMessageBA = retrieveMessage(inputImage)
+
+    var index = secretMessageBA.size
+    secretMessageBA.removeAt(--index)
+    secretMessageBA.removeAt(--index)
+    secretMessageBA.removeAt(--index)
+    val message = secretMessageBA.toByteArray().toString(Charsets.UTF_8)
+    println("Message:\n$message")
+}
+
+fun retrieveMessage(inputImage: BufferedImage): MutableList<Byte> {
     val secretMessageBA = mutableListOf<Byte>()
     var byte = ""
     var index: Int
-    loop@ for (y in 0 until inputImage.height) {
+    /*loop@ for (y in 0 until inputImage.height) {
         for (x in 0 until inputImage.width) {
             val color = Color(inputImage.getRGB(x, y))
             val bit = getBit(color.blue, 0)
@@ -73,13 +84,8 @@ fun show() {
                 }
             }
         }
-    }
-    index = secretMessageBA.size
-    secretMessageBA.removeAt(--index)
-    secretMessageBA.removeAt(--index)
-    secretMessageBA.removeAt(--index)
-    val message = secretMessageBA.toByteArray().toString(Charsets.UTF_8)
-    println("Message:\n$message")
+    }*/
+    return secretMessageBA
 }
 
 fun insert(secretMessage: ByteArray, inputImage: BufferedImage) {
