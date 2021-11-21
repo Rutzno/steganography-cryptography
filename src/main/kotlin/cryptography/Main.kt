@@ -72,6 +72,10 @@ fun insert(secretMessage: ByteArray, inputImage: BufferedImage) {
     }
 }
 
+fun getBit(value: Int, position: Int): Int {
+    return (value shr position) and 1
+}
+
 fun setLeastSignificantBitToOne(pixel: Int) : Int {
     return if (pixel % 2 == 0) pixel + 1
     else pixel
