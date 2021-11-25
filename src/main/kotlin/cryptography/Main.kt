@@ -61,6 +61,9 @@ fun show() {
     println("Input image file:")
     val infileName = readLine()!!.toString()
     val inImageFile = File(infileName)
+    println("Password:")
+    val password = readLine()!!.encodeToByteArray()
+
     val inputImage: BufferedImage = ImageIO.read(inImageFile)
     val secretMessageBA = retrieveMessage(inputImage)
 
