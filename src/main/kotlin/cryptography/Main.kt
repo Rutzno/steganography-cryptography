@@ -9,7 +9,7 @@ import kotlin.math.pow
 
 /**
  * @author Mack_TB
- * @version 1.0.3
+ * @version 1.0.4
  * @since 10/11/2021
  */
 
