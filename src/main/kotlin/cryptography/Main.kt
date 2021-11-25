@@ -62,6 +62,10 @@ fun show() {
     println("Input image file:")
     val infileName = readLine()!!.toString()
     val inImageFile = File(infileName)
+    if (!inImageFile.exists()) {
+        println("file $infileName doesn't exist!")
+        return
+    }
     println("Password:")
     val password = readLine()!!.encodeToByteArray()
 
