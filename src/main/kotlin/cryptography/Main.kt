@@ -65,29 +65,13 @@ fun show() {
     val password = readLine()!!.encodeToByteArray()
 
     val inputImage: BufferedImage = ImageIO.read(inImageFile)
-    val secretMessageBA = mutableListOf<Byte>()
-    var byte = ""
-    var index: Int
-    loop@ for (y in 0 until inputImage.height) {
-        for (x in 0 until inputImage.width) {
-            val color = Color(inputImage.getRGB(x, y))
-            val bit = getBit(color.blue, 0)
-            byte = byte.plus(bit)
-            if (byte.length == 8) {
-                secretMessageBA.add(convertBinaryStringToDec(byte))
-                byte = ""
-                index = secretMessageBA.size
-                if (secretMessageBA.size >= 3 && secretMessageBA[index - 1] == 3.toByte() &&
-                    secretMessageBA[index - 2] == 0.toByte() && secretMessageBA[index - 3] == 0.toByte()) {
-                    break@loop
-                }
-            }
-        }
-    }
-    index = secretMessageBA.size
+    val secretMessageBA = retrieveMessage(inputImage)
+
+    var index = secretMessageBA.size
     secretMessageBA.removeAt(--index)
     secretMessageBA.removeAt(--index)
     secretMessageBA.removeAt(--index)
+
     val decryptedMessage = encrypt(secretMessageBA.toByteArray(), password)
     val message = decryptedMessage.toString(Charsets.UTF_8)
     println("Message:\n$message")
