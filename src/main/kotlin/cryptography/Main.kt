@@ -39,11 +39,14 @@ fun hide() {
     val outfileName = readLine()!!.toString()
     val outImageFile = File(outfileName)
     println("Message to hide:")
-    var secretMessage = readLine()!!.encodeToByteArray()
-    secretMessage = add3Bytes(secretMessage)
+    val secretMessage = readLine()!!.encodeToByteArray()
+    println("Password:")
+    val password = readLine()!!.encodeToByteArray()
+    var encrypted = encrypt(secretMessage, password)
+    encrypted = add3Bytes(encrypted)
 
     val inputImage : BufferedImage = ImageIO.read(inImageFile)
-    if (secretMessage.size > inputImage.width + inputImage.height) {
+    if (encrypted.size > inputImage.width + inputImage.height) {
         println("The input image is not large enough to hold this message.")
         return
     }
