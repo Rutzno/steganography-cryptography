@@ -51,6 +51,7 @@ fun hide() {
         println("The input image is not large enough to hold this message.")
         return
     }
+
     insert(encrypted, inputImage)
 
     ImageIO.write(inputImage, "png", outImageFile)
