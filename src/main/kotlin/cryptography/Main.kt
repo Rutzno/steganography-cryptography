@@ -71,6 +71,7 @@ fun show() {
     secretMessageBA.removeAt(--index)
     secretMessageBA.removeAt(--index)
     secretMessageBA.removeAt(--index)
+
     val decryptedMessage = encrypt(secretMessageBA.toByteArray(), password)
     val message = decryptedMessage.toString(Charsets.UTF_8)
     println("Message:\n$message")
