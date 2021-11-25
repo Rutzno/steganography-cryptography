@@ -4,6 +4,7 @@ import java.awt.Color
 import java.awt.image.BufferedImage
 import java.io.File
 import javax.imageio.ImageIO
+import kotlin.experimental.xor
 import kotlin.math.pow
 
 /**
@@ -70,6 +71,21 @@ fun show() {
 
     val message = secretMessageBA.toByteArray().toString(Charsets.UTF_8)
     println("Message:\n$message")
+}
+
+fun encrypt(message: ByteArray, password: ByteArray): ByteArray {
+    val encrypted = mutableListOf<Byte>()
+    var passwordIndex = 0
+    for (i in message.indices) {
+        if (i < password.size) {
+            encrypted.add(message[i] xor password[i])
+        } else {
+            encrypted.add(message[i] xor password[passwordIndex])
+            passwordIndex++
+            if (passwordIndex == password.size) passwordIndex = 0
+        }
+    }
+    return encrypted.toByteArray()
 }
 
 fun retrieveMessage(inputImage: BufferedImage): MutableList<Byte> {
